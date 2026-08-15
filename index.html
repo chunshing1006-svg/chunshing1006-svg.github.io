@@ -1,0 +1,852 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#081510">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="YaKyoLife MOD">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>YaKyoLife Safari 直開修改版 v1.4.5 + MOD v0.6</title>
+<meta name="description" content="YaKyoLife v1.4.5 Safari 直開修改版，內建骰子骰子永遠 6 與訓練點數無限。">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=IBM+Plex+Mono:wght@500;700&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LeoGGcat/yakyulife@27aae348b0fa5def5e1313d34f0e81e7cc5982dd/css/style.css">
+<style>
+html,body{min-height:100%;background:#081510}
+#standalone-loading{
+  position:fixed;inset:0;z-index:2147483645;display:grid;place-items:center;
+  background:#081510;color:#f4f0df;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC",system-ui,sans-serif;
+  transition:opacity .25s ease
+}
+#standalone-loading.done{opacity:0;pointer-events:none}
+.loader-card{display:grid;gap:10px;text-align:center;padding:26px 22px}
+.loader-card .loader-ball{font-size:42px;animation:yklspin 1.2s ease-in-out infinite alternate}
+.loader-card span{font-size:12px;opacity:.65}
+@keyframes yklspin{from{transform:translateY(0) rotate(-8deg)}to{transform:translateY(-8px) rotate(8deg)}}
+.mod-standalone-badge{
+  margin:14px 0 18px;padding:10px 12px;border:1px solid #5f9c70;border-radius:12px;
+  background:#0f2d1c;display:grid;gap:3px;font-size:12px
+}
+.mod-standalone-badge b{color:#b9ffc9;font-size:13px}
+.mod-standalone-badge span{color:#c3d7c8}
+.standalone-credit{text-align:center;margin-top:22px;color:var(--dim,#8fa99a);font-size:11px;line-height:1.55}
+.standalone-credit a{color:var(--accent,#73d38b);text-decoration:none}
+#ver-badge{text-align:center;margin-top:6px;font-size:10px;letter-spacing:1px;color:var(--dim,#8fa99a);opacity:.65;font-family:monospace}
+#standalone-error{
+  position:fixed;left:10px;right:10px;top:10px;z-index:2147483647;
+  background:#6d1616;color:white;border:1px solid #ff9c9c;border-radius:12px;padding:12px 14px;
+  font:13px/1.5 -apple-system,BlinkMacSystemFont,system-ui,sans-serif;box-shadow:0 10px 30px #0008
+}
+</style>
+</head>
+<body>
+
+<div id="standalone-loading">
+  <div class="loader-card">
+    <div class="loader-ball">⚾</div>
+    <b>正在載入 YaKyoLife Safari 直開修改版…</b>
+    <span>v1.4.5 + MOD v0.5</span>
+  </div>
+</div>
+
+<div id="start">
+  <div class="wrap">
+    <h1 id="logo-tap" class="lockup">
+      <img class="wm-img" crossorigin="anonymous" src="https://cdn.jsdelivr.net/gh/LeoGGcat/yakyulife@27aae348b0fa5def5e1313d34f0e81e7cc5982dd/assets/wordmark-cream.png" alt="YaKyoLife" decoding="async">
+      <span class="lockup-sub"><i></i><em>棒球人生模擬器</em><i></i></span>
+    </h1>
+    <p class="sub">高中三年養成 → 選秀・旅日・旅美 → 國際賽 → 衰退與引退。每一顆骰子都算數。</p>
+
+    <div class="mod-standalone-badge">
+      <b>Safari 直開修改版</b>
+      <span>🎲 骰子骰子永遠 6 ＋ 🏋️ 訓練點數無限</span>
+    </div>
+
+    <div class="field"><label for="in-name">球員資料</label>
+      <div class="player-id-input">
+        <input id="in-name" maxlength="10" placeholder="姓名" aria-label="球員姓名">
+        <div class="jersey-input"><span aria-hidden="true">#</span><input id="in-number" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" placeholder="背號" aria-label="背號"></div>
+      </div>
+    </div>
+
+    <div class="field"><label>守位</label>
+      <div class="seg" id="seg-pos">
+        <button data-v="P" class="on">投手</button><button data-v="C">捕手</button>
+        <button data-v="IF">內野手</button><button data-v="OF">外野手</button>
+      </div>
+    </div>
+
+    <button class="btn main" style="margin-top:28px" id="btn-start">開始生涯 ▸ 高一春天</button>
+
+    <details id="fld-display">
+      <summary>顯示設定<span class="sum" id="disp-sum"></span></summary>
+      <div id="disp-body">
+        <div class="field"><label>佈景主題</label>
+          <div class="seg two" id="seg-theme">
+            <button data-t="a" class="on">深綠記分板</button><button data-t="b">電子看板</button>
+            <button data-t="c">報紙版面</button><button data-t="d">現代儀表板</button>
+          </div>
+        </div>
+        <div class="field" id="fld-big"><label>字級</label>
+          <div class="seg" id="seg-big">
+            <button data-b="0" class="on">標準</button><button data-b="1">大字</button>
+          </div>
+        </div>
+        <div class="field" id="fld-ui"><label>介面版型</label>
+          <div class="seg two" id="seg-ui">
+            <button data-u="0">電腦版</button><button data-u="1" class="on">手機版</button>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <p class="seedline">世界種子
+      <input id="seed-show" maxlength="24">
+      · <a href="#" id="seed-re">換一個</a><br>
+      相同種子＋相同選擇＝相同人生（可直接輸入朋友的種子碼）
+    </p>
+
+    <footer class="standalone-credit">
+      原作： <a href="https://www.yakyolife.com/" target="_blank" rel="noopener">YaKyoLife</a>
+      / Produced by 最先生 Mr.TheMost<br>
+      Safari 直開修改版 · 非商業用途 · CC BY-NC 4.0
+    </footer>
+    <div id="ver-badge">v1.4.5 · MOD v0.6</div>
+  </div>
+</div>
+
+<div id="app">
+  <aside id="tl-side"><div id="tl-in">
+    <div class="tl-brand"><img class="wm-img" crossorigin="anonymous" src="https://cdn.jsdelivr.net/gh/LeoGGcat/yakyulife@27aae348b0fa5def5e1313d34f0e81e7cc5982dd/assets/wordmark-cream.png" alt="YaKyoLife"><span class="sub">棒球人生模擬器</span></div>
+    <div id="tl-list"></div>
+    <div class="tl-seed">SEED <b id="tl-seed"></b><span class="tl-ver" id="tl-ver"></span></div>
+  </div></aside>
+
+  <div id="mid">
+    <header id="board" style="display:none">
+      <div id="bd-brand"><img class="wm-img" crossorigin="anonymous" src="https://cdn.jsdelivr.net/gh/LeoGGcat/yakyulife@27aae348b0fa5def5e1313d34f0e81e7cc5982dd/assets/wordmark-cream.png" alt="YaKyoLife"><span class="sub">棒球人生模擬器</span></div>
+      <div id="bd-top"><div id="bd-name"></div><div id="bd-role"></div><div id="bd-team"></div><span id="bd-tj"></span><button id="btn-menu" title="選單">選單</button></div>
+      <div id="bd-grid">
+        <div class="bd-cell"><b id="bd-age">16</b><span>年齡</span></div>
+        <div class="bd-cell"><b id="bd-year">2026</b><span>年份</span></div>
+        <div class="bd-cell"><b id="bd-ovr">30</b><span>綜合</span></div>
+        <div class="bd-cell" id="bd-sal-cell" tabindex="0"><b id="bd-sal">0</b><span id="bd-sal-lbl">生涯薪(萬)</span><i class="bd-tip" id="bd-sal-tip"></i></div>
+      </div>
+      <div id="lamps">
+        <span class="lamp" id="lp0"><i></i>季初</span>
+        <span class="lamp" id="lp1"><i></i>賽季中</span>
+        <span class="lamp" id="lp2"><i></i>季末</span>
+      </div>
+      <div id="tl-strip"></div>
+    </header>
+    <main id="log"></main>
+  </div>
+
+  <aside id="act-side"><div id="act-in">
+    <div id="trait-side"><div class="tt">特質</div><div id="trait-tags"></div></div>
+    <button id="act-toggle" style="display:none">⌄ 收合選項</button>
+    <footer id="act" style="display:none"></footer>
+  </div></aside>
+</div>
+
+<div id="modal"><div id="modal-box"></div></div>
+<div id="alloc-full"><div id="af-inner">
+  <div class="af-head"><span class="af-title" id="af-title"></span><button class="btn" id="af-close">收起</button></div>
+  <div id="af-body"></div>
+</div></div>
+
+
+<script>
+(function(){
+  try{
+    const nativeReplace = history.replaceState.bind(history);
+    history.replaceState = function(state,title,url){
+      try { return nativeReplace(state,title,url); }
+      catch(e){ console.warn('[Standalone] history.replaceState skipped for local file:', e); }
+    };
+  }catch(e){}
+
+  window.__yklStandaloneReady = false;
+  window.addEventListener('error', function(ev){
+    if(window.__yklStandaloneReady) return;
+    console.error('[YaKyoLife standalone]', ev.error || ev.message);
+  });
+})();
+</script>
+
+<script type="module" src="https://cdn.jsdelivr.net/gh/LeoGGcat/yakyulife@27aae348b0fa5def5e1313d34f0e81e7cc5982dd/src/main.js"></script>
+<script>/*
+  YaKyoLife compatibility / attribution:
+  Original game: YaKyoLife 棒球人生模擬器
+  Original author/project: Mr.TheMost / LeoGGcat
+  Project license: CC BY-NC 4.0
+  This userscript is intended only for non-commercial, local experimentation.
+*/
+
+(() => {
+  'use strict';
+
+  const INJECT_ID = 'ykl-modifier-module';
+  if (document.getElementById(INJECT_ID)) return;
+
+  const mod = document.createElement('script');
+  mod.id = INJECT_ID;
+  mod.type = 'module';
+  mod.textContent = `
+    const YKL_CDN = 'https://cdn.jsdelivr.net/gh/LeoGGcat/yakyulife@27aae348b0fa5def5e1313d34f0e81e7cc5982dd/';
+    const stateURL = YKL_CDN + 'src/core/state.js';
+    const domURL = YKL_CDN + 'src/ui/dom.js';
+    const abilitiesURL = YKL_CDN + 'src/data/abilities.js';
+    const abilityEngineURL = YKL_CDN + 'src/engine/ability.js';
+    const allocURL = YKL_CDN + 'src/ui/alloc.js';
+
+    let stateMod, domMod, abilityMod, abilityEngineMod, allocMod;
+    try {
+      [stateMod, domMod, abilityMod, abilityEngineMod, allocMod] = await Promise.all([
+        import(stateURL),
+        import(domURL),
+        import(abilitiesURL),
+        import(abilityEngineURL),
+        import(allocURL)
+      ]);
+    } catch (err) {
+      console.error('[YKL Modifier] 模組載入失敗', err);
+      const e = document.createElement('div');
+      e.textContent = 'YKL 修改器：遊戲模組載入失敗，可能是遊戲版本已更新。';
+      Object.assign(e.style, {
+        position:'fixed', right:'12px', bottom:'12px', zIndex:'2147483647',
+        background:'#7f1d1d', color:'#fff', padding:'10px 12px',
+        borderRadius:'10px', font:'14px system-ui'
+      });
+      document.body.appendChild(e);
+      setTimeout(()=>e.remove(), 7000);
+      throw err;
+    }
+
+    const { board } = domMod;
+    const { ABL, POS_AB } = abilityMod;
+    const { addAb } = abilityEngineMod;
+    const BACKUP_KEY = 'ykl-modifier-backup-v1';
+    const DICE6_KEY = 'ykl-modifier-dice6-v1';
+    const TRAIN_INF_KEY = 'ykl-modifier-traininf-v1';
+    const _memStore = Object.create(null);
+    const storage = {
+      getItem(k){ try { return window.localStorage.getItem(k); } catch(e) { return _memStore[k] ?? null; } },
+      setItem(k,v){ try { window.localStorage.setItem(k,String(v)); } catch(e) { _memStore[k] = String(v); } }
+    };
+    let dice6Enabled = storage.getItem(DICE6_KEY) === '1';
+    let trainInfEnabled = storage.getItem(TRAIN_INF_KEY) === '1';
+    const processedDiceTops = new WeakSet();
+    const diceUndo = [];
+    let poolRefundGuard = false;
+    let pendingPoolClick = null;
+
+    const labels = {
+      genius:'天才', iron:'鐵人', glass:'玻璃人',
+      yips:'Yips', distract:'分心', cancer:'休息室毒瘤',
+      clutch:'關鍵先生', phoenix:'鳳凰', rubber:'橡膠手臂',
+      legend:'傳奇', grinder:'苦練型', taiwan:'台灣之光'
+    };
+
+    const root = document.createElement('div');
+    root.id = 'ykl-modifier-root';
+    root.innerHTML = \`
+      <button id="yklm-fab" type="button">⚾ 修改器</button>
+      <section id="yklm-panel" hidden>
+        <header>
+          <strong>YaKyoLife 獨立版修改器</strong>
+          <button id="yklm-close" type="button">×</button>
+        </header>
+        <div class="yklm-note">修改目前獨立版遊戲中的球員狀態；重新開始生涯後，球員狀態會重置。</div>
+        <div id="yklm-status"></div>
+
+        <div class="yklm-actions">
+          <button data-action="diamond">💎 超級球員</button>
+          <button data-action="dice6" id="yklm-dice6">🎲 骰子永遠 6：關</button>
+          <button data-action="traininf" id="yklm-traininf">🏋️ 訓練點數無限：關</button>
+          <button data-action="heal">🩹 清除傷病</button>
+          <button data-action="awakening">🎲 覺醒門檻</button>
+          <button data-action="refresh">↻ 重新讀取</button>
+        </div>
+
+        <details open>
+          <summary>目前能力值</summary>
+          <div id="yklm-ab" class="yklm-grid"></div>
+          <div class="yklm-mini-actions">
+            <button data-action="ab80">目前能力全 80</button>
+          </div>
+        </details>
+
+        <details>
+          <summary>潛力上限</summary>
+          <div id="yklm-pot" class="yklm-grid"></div>
+          <div class="yklm-mini-actions">
+            <button data-action="pot80">潛力全 80</button>
+          </div>
+        </details>
+
+        <details>
+          <summary>特質</summary>
+          <div id="yklm-traits" class="yklm-traits"></div>
+        </details>
+
+        <details>
+          <summary>其他數值</summary>
+          <div class="yklm-grid" id="yklm-other"></div>
+        </details>
+
+        <div class="yklm-actions yklm-bottom">
+          <button data-action="backup">備份目前修改值</button>
+          <button data-action="restore">還原備份</button>
+        </div>
+        <div class="yklm-foot">非商業本機測試工具｜原遊戲：YaKyoLife / Mr.TheMost / LeoGGcat（CC BY-NC 4.0）</div>
+      </section>
+    \`;
+
+    const style = document.createElement('style');
+    style.textContent = \`
+      #ykl-modifier-root{font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;color:#eef7f0}
+      #yklm-fab{
+        position:fixed;right:16px;bottom:16px;z-index:2147483646;
+        border:1px solid #7bcf91;background:#123c25;color:#fff;
+        border-radius:999px;padding:10px 14px;font-weight:800;box-shadow:0 8px 28px #0008;cursor:pointer
+      }
+      #yklm-panel{
+        position:fixed;right:14px;bottom:64px;z-index:2147483647;
+        width:min(390px,calc(100vw - 28px));max-height:min(78vh,720px);overflow:auto;
+        background:#0d2015;border:1px solid #3c7650;border-radius:16px;
+        box-shadow:0 18px 55px #000a;padding:0 12px 12px
+      }
+      #yklm-panel header{
+        position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;
+        margin:0 -12px 8px;padding:12px 14px;background:#0d2015;border-bottom:1px solid #294a34;border-radius:16px 16px 0 0
+      }
+      #yklm-panel header strong{font-size:16px}
+      #yklm-close{border:0;background:transparent;color:#fff;font-size:26px;line-height:1;cursor:pointer}
+      .yklm-note,.yklm-foot{font-size:11px;line-height:1.5;color:#9eb4a5}
+      #yklm-status{margin:8px 0;padding:8px 10px;border-radius:10px;background:#153522;font-size:13px}
+      .yklm-actions,.yklm-mini-actions{display:flex;gap:7px;flex-wrap:wrap;margin:9px 0}
+      #yklm-panel button{
+        border:1px solid #477b58;background:#183f28;color:#f3fff7;border-radius:9px;
+        padding:7px 9px;font-weight:700;cursor:pointer
+      }
+      #yklm-panel button:hover{filter:brightness(1.15)}
+      #yklm-panel details{border-top:1px solid #284836;padding:8px 0}
+      #yklm-panel summary{cursor:pointer;font-weight:800;margin-bottom:8px}
+      .yklm-grid{display:grid;grid-template-columns:1fr 88px;gap:6px 8px;align-items:center}
+      .yklm-grid label{font-size:13px;color:#d7e6dc}
+      .yklm-grid input{
+        width:100%;box-sizing:border-box;border:1px solid #4b7258;background:#09170f;color:#fff;
+        border-radius:7px;padding:6px 7px;text-align:right
+      }
+      .yklm-traits{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+      .yklm-trait{display:flex;align-items:center;gap:7px;background:#102a1b;padding:7px;border-radius:8px;font-size:12px}
+      .yklm-trait input{accent-color:#57c378}
+      .yklm-bottom{border-top:1px solid #284836;padding-top:10px}
+      @media (max-width:520px){
+        #yklm-panel{
+          left:8px;right:8px;width:auto;bottom:64px;max-height:82vh;
+          padding:0 12px 14px;border-radius:18px
+        }
+        #yklm-fab{
+          right:10px;bottom:10px;min-height:46px;padding:11px 16px;
+          font-size:15px
+        }
+        #yklm-panel header{padding:13px 14px}
+        #yklm-panel header strong{font-size:17px}
+        #yklm-panel button{
+          min-height:44px;padding:10px 12px;font-size:14px
+        }
+        .yklm-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+        .yklm-mini-actions{display:grid;grid-template-columns:1fr;gap:8px}
+        .yklm-grid{grid-template-columns:1fr 96px;gap:8px 10px}
+        .yklm-grid label{font-size:14px}
+        .yklm-grid input{min-height:42px;font-size:16px}
+        .yklm-traits{grid-template-columns:1fr 1fr;gap:8px}
+        .yklm-trait{min-height:42px;font-size:13px}
+        .yklm-note,.yklm-foot{font-size:12px}
+      }
+    \`;
+    document.head.appendChild(style);
+    document.body.appendChild(root);
+
+    const $ = (sel) => root.querySelector(sel);
+    const panel = $('#yklm-panel');
+    const status = $('#yklm-status');
+
+    function S() { return stateMod.S; }
+
+    function syncDice6Button() {
+      const b = $('#yklm-dice6');
+      if (!b) return;
+      b.textContent = dice6Enabled ? '🎲 骰子永遠 6：開' : '🎲 骰子永遠 6：關';
+      b.style.background = dice6Enabled ? '#2f6f3e' : '#183f28';
+      b.style.borderColor = dice6Enabled ? '#8de59d' : '#477b58';
+    }
+
+    function syncTrainInfButton() {
+      const b = $('#yklm-traininf');
+      if (!b) return;
+      b.textContent = trainInfEnabled ? '🏋️ 訓練點數無限：開' : '🏋️ 訓練點數無限：關';
+      b.style.background = trainInfEnabled ? '#2f6f3e' : '#183f28';
+      b.style.borderColor = trainInfEnabled ? '#8de59d' : '#477b58';
+    }
+
+    function forceDiceVisuals() {
+      const top = document.getElementById('al-top');
+      const wrap = top?.querySelector('#dice');
+      if (!wrap) return;
+      const dice = [...wrap.querySelectorAll('.die')];
+
+      // allocUI 第一次 render 時，DOM 文字就是遊戲真正的 dice[] 值；先保存起來。
+      dice.forEach(el => {
+        if (!el.dataset.yklOrig) {
+          const v = Number(el.textContent.trim());
+          if (Number.isInteger(v) && v >= 1 && v <= 6) el.dataset.yklOrig = String(v);
+        }
+        if (el.dataset.yklOrig) {
+          const shown = dice6Enabled ? '6' : el.dataset.yklOrig;
+          if (el.textContent !== shown) el.textContent = shown;
+          el.classList.toggle('six', dice6Enabled || Number(el.dataset.yklOrig) === 6);
+        }
+      });
+
+      // 將「6」的累積次數同步成實際修改後的骰值；同一輪只處理一次。
+      if (dice6Enabled && !processedDiceTops.has(top) && dice.length && dice.every(el => el.dataset.yklOrig)) {
+        processedDiceTops.add(top);
+        const s = S();
+        if (s && s.age < 22 && !s.traits?.genius) {
+          const extraSix = dice.reduce((n, el) => n + (Number(el.dataset.yklOrig) === 6 ? 0 : 1), 0);
+          s.six = Number(s.six || 0) + extraSix;
+        }
+      }
+    }
+
+    // 真正修正能力加點：原遊戲先用原始骰值 addAb，再補上 (6 - 原骰值)。
+    // 因此不是只把畫面改成 6，而是能力成長也等同每顆骰子都是 6。
+    document.addEventListener('click', (ev) => {
+      if (!dice6Enabled) return;
+
+      const row = ev.target.closest?.('.abrow');
+      const top = document.getElementById('al-top');
+      const active = top?.querySelector('#dice .die.active');
+      if (row && active && active.dataset.yklOrig) {
+        const s = S();
+        const rows = [...document.querySelectorAll('#al-rows .abrow')];
+        const idx = rows.indexOf(row);
+        const key = s && idx >= 0 ? POS_AB[s.pos]?.[idx] : null;
+        const orig = Number(active.dataset.yklOrig);
+        if (key && Number.isInteger(orig) && orig >= 1 && orig <= 6) {
+          const snap = { key, ab: s.ab[key], carry: s.carry?.[key] || 0 };
+          setTimeout(() => {
+            const now = S();
+            if (!now) return;
+            const diff = 6 - orig;
+            if (diff > 0) addAb(key, diff);
+            diceUndo.push(snap);
+            allocMod.ALLOC?.render?.();
+            refreshGameBoard();
+            forceDiceVisuals();
+            updateStatus('🎲 本顆骰子以 6 點套用');
+          }, 0);
+        }
+      }
+
+      const undo = ev.target.closest?.('#al-btm button');
+      if (undo && /復原/.test(undo.textContent || '') && diceUndo.length) {
+        const snap = diceUndo.pop();
+        setTimeout(() => {
+          const s = S();
+          if (!s) return;
+          s.ab[snap.key] = snap.ab;
+          if (!s.carry) s.carry = {};
+          s.carry[snap.key] = snap.carry;
+          allocMod.ALLOC?.render?.();
+          refreshGameBoard();
+          forceDiceVisuals();
+        }, 0);
+      }
+    }, true);
+
+
+    // 訓練點數無限：
+    // allocUI 的 pool 模式每點能力一次會在閉包內執行 pool--。
+    // 外部無法直接改那個閉包變數，因此採「原生加點 -> 原生復原補回 pool -> 恢復加點後能力」：
+    // 結果是能力/進度照常增加，但剩餘可分配點數維持不變。
+    document.addEventListener('click', (ev) => {
+      if (!trainInfEnabled || poolRefundGuard) return;
+      const row = ev.target.closest?.('.abrow');
+      if (!row) return;
+
+      const top = document.getElementById('al-top');
+      const poolText = top?.querySelector('.pool')?.textContent || '';
+      if (top?.querySelector('#dice') || !/剩餘可分配點數/.test(poolText)) return;
+
+      const s = S();
+      if (!s) return;
+      const rows = [...document.querySelectorAll('#al-rows .abrow')];
+      const idx = rows.indexOf(row);
+      const key = idx >= 0 ? POS_AB[s.pos]?.[idx] : null;
+      if (!key || s.ab[key] >= 80) return;
+
+      pendingPoolClick = {
+        key,
+        beforeAb: s.ab[key],
+        beforeCarry: s.carry?.[key] || 0
+      };
+    }, true);
+
+    document.addEventListener('click', (ev) => {
+      if (!trainInfEnabled || poolRefundGuard || !pendingPoolClick) return;
+      const row = ev.target.closest?.('.abrow');
+      if (!row) return;
+
+      const snap = pendingPoolClick;
+      pendingPoolClick = null;
+
+      // 走到 bubble 階段時，原遊戲的 row.onclick 已完成 addAb() 與 pool--。
+      const s = S();
+      if (!s) return;
+      const post = {
+        ab: s.ab[snap.key],
+        carry: s.carry?.[snap.key] || 0,
+        lastOverflow: s.lastOverflow || 0
+      };
+
+      // 找原生復原鈕：它會把剛才的 pool-- 補回，並把能力還原。
+      const undo = [...document.querySelectorAll('#al-btm button')]
+        .find(b => /復原/.test(b.textContent || '') && !b.disabled);
+      if (!undo) return;
+
+      poolRefundGuard = true;
+      undo.click(); // pool++，並回復能力/進度
+      poolRefundGuard = false;
+
+      // 再把「加點後」的能力與進度寫回；pool 已經被原生 undo 補回，所以不會消耗。
+      const now = S();
+      if (!now) return;
+      now.ab[snap.key] = post.ab;
+      if (!now.carry) now.carry = {};
+      now.carry[snap.key] = post.carry;
+      now.lastOverflow = post.lastOverflow;
+
+      allocMod.ALLOC?.render?.();
+      refreshGameBoard();
+      forceDiceVisuals();
+      updateStatus('🏋️ 訓練完成；可分配點數未消耗');
+    }, false);
+
+    const diceObserver = new MutationObserver(() => {
+      if (dice6Enabled) forceDiceVisuals();
+    });
+    diceObserver.observe(document.body, {subtree:true, childList:true, characterData:true});
+
+
+    function currentPhase() {
+      for (let i=0;i<3;i++) {
+        const el = document.getElementById('lp'+i);
+        if (el?.classList.contains('on')) return i;
+      }
+      return 0;
+    }
+
+    function refreshGameBoard() {
+      try {
+        if (S()) board(currentPhase());
+      } catch (e) {
+        console.warn('[YKL Modifier] board refresh failed', e);
+      }
+    }
+
+    function clamp80(v) {
+      const n = Number(v);
+      if (!Number.isFinite(n)) return 20;
+      return Math.max(0, Math.min(80, Math.round(n)));
+    }
+
+    function renderKV(container, obj, sourceName) {
+      container.innerHTML = '';
+      if (!obj) return;
+      Object.keys(obj).forEach(key => {
+        const label = document.createElement('label');
+        label.textContent = ABL[key] || key;
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.min = '0';
+        input.max = '80';
+        input.step = '1';
+        input.value = obj[key];
+        input.dataset.source = sourceName;
+        input.dataset.key = key;
+        input.addEventListener('change', () => {
+          const s = S();
+          if (!s) return;
+          input.value = clamp80(input.value);
+          s[sourceName][key] = Number(input.value);
+          refreshGameBoard();
+          updateStatus('已修改 ' + (ABL[key] || key));
+        });
+        container.append(label, input);
+      });
+    }
+
+    function renderTraits() {
+      const wrap = $('#yklm-traits');
+      wrap.innerHTML = '';
+      const s = S();
+      if (!s?.traits) return;
+      const keys = ['genius','iron','glass','clutch','phoenix','rubber','legend','grinder','taiwan','yips','distract','cancer'];
+      keys.forEach(key => {
+        if (!(key in s.traits)) return;
+        const item = document.createElement('label');
+        item.className = 'yklm-trait';
+        const cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.checked = !!s.traits[key];
+        cb.addEventListener('change', () => {
+          s.traits[key] = cb.checked;
+          refreshGameBoard();
+          updateStatus('已更新特質：' + (labels[key] || key));
+        });
+        const span = document.createElement('span');
+        span.textContent = labels[key] || key;
+        item.append(cb, span);
+        wrap.appendChild(item);
+      });
+    }
+
+    function renderOther() {
+      const wrap = $('#yklm-other');
+      wrap.innerHTML = '';
+      const s = S();
+      if (!s) return;
+
+      const fields = [
+        ['six','累積擲出 6 次數',0,99],
+        ['salary','生涯薪資內部值',0,999999999],
+        ['cntSave','保守選擇次數',0,999],
+        ['cntBoldWin','冒險成功次數',0,999],
+        ['cntBoldFail','冒險失敗次數',0,999]
+      ];
+
+      fields.forEach(([key, name, min, max]) => {
+        if (!(key in s)) return;
+        const label = document.createElement('label');
+        label.textContent = name;
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.min = String(min);
+        input.max = String(max);
+        input.step = '1';
+        input.value = s[key];
+        input.addEventListener('change', () => {
+          let v = Number(input.value);
+          if (!Number.isFinite(v)) v = 0;
+          v = Math.max(min, Math.min(max, Math.round(v)));
+          input.value = v;
+          s[key] = v;
+          refreshGameBoard();
+          updateStatus('已修改：' + name);
+        });
+        wrap.append(label, input);
+      });
+    }
+
+    function updateStatus(msg='') {
+      const s = S();
+      if (!s) {
+        status.textContent = '尚未開始生涯。請先在遊戲中建立球員，再開啟修改器。';
+        return;
+      }
+      const ovr = document.getElementById('bd-ovr')?.textContent || '?';
+      status.innerHTML = '<b>' + s.name + ' #' + s.jersey + '</b>｜' +
+        s.age + ' 歲｜' + s.year + '｜OVR ' + ovr +
+        (msg ? '<br><span style="color:#9ee8b2">' + msg + '</span>' : '');
+    }
+
+    function refreshUI(msg='') {
+      const s = S();
+      if (!s) {
+        $('#yklm-ab').innerHTML = '';
+        $('#yklm-pot').innerHTML = '';
+        $('#yklm-traits').innerHTML = '';
+        $('#yklm-other').innerHTML = '';
+        updateStatus(msg);
+        return;
+      }
+      renderKV($('#yklm-ab'), s.ab, 'ab');
+      renderKV($('#yklm-pot'), s.pot, 'pot');
+      renderTraits();
+      renderOther();
+      refreshGameBoard();
+      updateStatus(msg);
+    }
+
+    function editableSnapshot(s) {
+      return {
+        ab: structuredClone(s.ab),
+        pot: structuredClone(s.pot),
+        traits: structuredClone(s.traits),
+        six: s.six,
+        salary: s.salary,
+        cntSave: s.cntSave,
+        cntBoldWin: s.cntBoldWin,
+        cntBoldFail: s.cntBoldFail,
+        injNext: s.injNext,
+        tmpInj: s.tmpInj,
+        rehab: s.rehab,
+        marketInjury: s.marketInjury
+      };
+    }
+
+    function applySnapshot(s, b) {
+      if (b.ab) Object.assign(s.ab, b.ab);
+      if (b.pot) Object.assign(s.pot, b.pot);
+      if (b.traits) Object.assign(s.traits, b.traits);
+      ['six','salary','cntSave','cntBoldWin','cntBoldFail','injNext','tmpInj','rehab','marketInjury']
+        .forEach(k => { if (k in b) s[k] = b[k]; });
+    }
+
+    root.addEventListener('click', (ev) => {
+      const btn = ev.target.closest('button');
+      if (!btn) return;
+
+      if (btn.id === 'yklm-fab') {
+        panel.hidden = !panel.hidden;
+        if (!panel.hidden) refreshUI();
+        return;
+      }
+      if (btn.id === 'yklm-close') {
+        panel.hidden = true;
+        return;
+      }
+
+      const action = btn.dataset.action;
+      if (!action) return;
+      const s = S();
+
+      if (action === 'refresh') {
+        refreshUI('已重新讀取目前狀態');
+        syncDice6Button();
+        syncTrainInfButton();
+        forceDiceVisuals();
+        return;
+      }
+      if (action === 'dice6') {
+        dice6Enabled = !dice6Enabled;
+        storage.setItem(DICE6_KEY, dice6Enabled ? '1' : '0');
+        syncDice6Button();
+        forceDiceVisuals();
+        refreshUI(dice6Enabled ? '🎲 訓練骰已固定為 6' : '🎲 訓練骰恢復正常');
+        return;
+      }
+      if (action === 'traininf') {
+        trainInfEnabled = !trainInfEnabled;
+        pendingPoolClick = null;
+        storage.setItem(TRAIN_INF_KEY, trainInfEnabled ? '1' : '0');
+        syncTrainInfButton();
+        refreshUI(trainInfEnabled ? '🏋️ 訓練點數無限已開啟' : '🏋️ 訓練點數恢復正常消耗');
+        return;
+      }
+      if (!s) {
+        refreshUI('請先開始一段生涯');
+        return;
+      }
+
+      if (action === 'ab80') {
+        Object.keys(s.ab).forEach(k => s.ab[k] = 80);
+        refreshUI('目前能力已全設為 80');
+      } else if (action === 'pot80') {
+        Object.keys(s.pot).forEach(k => s.pot[k] = 80);
+        refreshUI('潛力已全設為 80');
+      } else if (action === 'heal') {
+        s.injNext = 0;
+        s.tmpInj = 0;
+        s.rehab = 0;
+        s.marketInjury = 'healthy';
+        refreshUI('目前傷病／復健狀態已清除');
+      } else if (action === 'awakening') {
+        s.six = Math.max(5, Number(s.six || 0));
+        refreshUI('累積擲出 6 次數已設為至少 5');
+      } else if (action === 'diamond') {
+        Object.keys(s.ab).forEach(k => s.ab[k] = 80);
+        Object.keys(s.pot).forEach(k => s.pot[k] = 80);
+        if ('genius' in s.traits) s.traits.genius = true;
+        if ('iron' in s.traits) s.traits.iron = true;
+        ['glass','yips','distract','cancer'].forEach(k => {
+          if (k in s.traits) s.traits[k] = false;
+        });
+        s.injNext = 0;
+        s.tmpInj = 0;
+        s.rehab = 0;
+        s.marketInjury = 'healthy';
+        refreshUI('💎 超級球員模式已套用');
+      } else if (action === 'backup') {
+        try {
+          storage.setItem(BACKUP_KEY, JSON.stringify(editableSnapshot(s)));
+          refreshUI('已備份目前可修改數值');
+        } catch (e) {
+          updateStatus('備份失敗：' + e.message);
+        }
+      } else if (action === 'restore') {
+        try {
+          const raw = storage.getItem(BACKUP_KEY);
+          if (!raw) {
+            updateStatus('沒有找到備份');
+          } else {
+            applySnapshot(s, JSON.parse(raw));
+            refreshUI('已還原備份');
+          }
+        } catch (e) {
+          updateStatus('還原失敗：' + e.message);
+        }
+      }
+    });
+
+    syncDice6Button();
+    syncTrainInfButton();
+    forceDiceVisuals();
+    console.info('[YKL Safari Direct] v0.6.0 loaded');
+  `;
+
+  document.documentElement.appendChild(mod);
+})();
+</script>
+
+<script>
+(function(){
+  const loading = document.getElementById('standalone-loading');
+  let tries = 0;
+  const timer = setInterval(()=>{
+    tries++;
+    const startBtn = document.getElementById('btn-start');
+    if(startBtn && typeof startBtn.onclick === 'function'){
+      window.__yklStandaloneReady = true;
+      loading?.classList.add('done');
+      setTimeout(()=>loading?.remove(),350);
+
+      // Default to the game's mobile layout for the standalone mobile edition.
+      const mobileBtn = document.querySelector('#seg-ui button[data-u="1"]');
+      if(mobileBtn && !document.body.classList.contains('mobile-ui')) mobileBtn.click();
+
+      clearInterval(timer);
+      return;
+    }
+    if(tries >= 30){
+      clearInterval(timer);
+      loading?.remove();
+      const e=document.createElement('div');
+      e.id='standalone-error';
+      e.innerHTML='<b>無法載入遊戲本體。</b><br>此獨立 HTML 在啟動時需要網路連線。請確認 Wi‑Fi 或行動網路後，再重新開啟此 HTML。';
+      document.body.appendChild(e);
+    }
+  },250);
+})();
+</script>
+
+</body>
+</html>
