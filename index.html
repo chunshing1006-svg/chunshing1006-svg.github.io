@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="YaKyoLife MOD">
 <meta name="format-detection" content="telephone=no">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>YaKyoLife Safari 直開修改版 v1.4.5 + MOD v0.9</title>
+<title>YaKyoLife Safari 直開修改版 v1.4.5 + MOD v0.9.1</title>
 <meta name="description" content="YaKyoLife v1.4.5 Safari 直開修改版，內建骰子永遠 6 與訓練點數無限。">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,7 +49,7 @@ html,body{min-height:100%;background:#081510}
   <div class="loader-card">
     <div class="loader-ball">⚾</div>
     <b>正在載入 YaKyoLife Safari 直開修改版…</b>
-    <span>v1.4.5 + MOD v0.9</span>
+    <span>v1.4.5 + MOD v0.9.1</span>
   </div>
 </div>
 
@@ -115,7 +115,7 @@ html,body{min-height:100%;background:#081510}
       / Produced by 最先生 Mr.TheMost<br>
       Safari 直開修改版 · 非商業用途 · CC BY-NC 4.0
     </footer>
-    <div id="ver-badge">v1.4.5 · MOD v0.9</div>
+    <div id="ver-badge">v1.4.5 · MOD v0.9.1</div>
   </div>
 </div>
 
@@ -478,7 +478,7 @@ html,body{min-height:100%;background:#081510}
         const bar=r.querySelector('.bar i'), mark=r.querySelector('.bar em');
         if(bar)bar.style.width=Math.min(100,v/99*100)+'%';
         if(mark)mark.style.left=Math.min(100,pk/99*100)+'%';
-        const val=r.querySelector('.val'); if(val&&v>=80)val.innerHTML=`${v}<small style="opacity:.5">/${pk}</small>`;
+        const val=r.querySelector('.val'); if(val&&v>=80)val.innerHTML=String(v)+'<small style="opacity:.5">/'+String(pk)+'</small>';
       });
       const premature=[...document.querySelectorAll('#al-btm button')].find(b=>/能力已達上限/.test(b.textContent||''));
       if(premature&&keys.some(k=>(s.ab[k]||0)<99))premature.style.display='none';
@@ -497,7 +497,7 @@ html,body{min-height:100%;background:#081510}
       const proxy=[...document.querySelectorAll('#al-rows .abrow')][idx]; proxy?.click();
       if(!isDice&&trainInfEnabled){const undo=[...document.querySelectorAll('#al-btm button')].find(b=>/復原/.test(b.textContent||'')&&!b.disabled); undo?.click();}
       s.ab[k]=oldAb; s.carry[k]=oldCarry; addAb(k,amt); allocMod.ALLOC?.render?.(); refreshGameBoard(); high99Guard=false;
-      fix99AllocationUI(); forceDiceVisuals(); updateStatus(`🚀 ${ABL[k]||k} 已可繼續訓練至 99`);
+      fix99AllocationUI(); forceDiceVisuals(); updateStatus('🚀 '+(ABL[k]||k)+' 已可繼續訓練至 99');
       ev.preventDefault(); ev.stopImmediatePropagation(); return true;
     }
     document.addEventListener('click',ev=>{consumeHigh99Training(ev);},true);
@@ -943,7 +943,7 @@ html,body{min-height:100%;background:#081510}
     bindLoveSettings();
     forceDiceVisuals();
     fix99AllocationUI();
-    console.info('[YKL Safari Direct] v0.9.0 loaded');
+    console.info('[YKL Safari Direct] v0.9.1 loaded');
   `;
 
   document.documentElement.appendChild(mod);
