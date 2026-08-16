@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="YaKyoLife MOD">
 <meta name="format-detection" content="telephone=no">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>YaKyoLife Safari 直開修改版 v1.4.5 + MOD v0.7</title>
+<title>YaKyoLife Safari 直開修改版 v1.4.5 + MOD v0.9</title>
 <meta name="description" content="YaKyoLife v1.4.5 Safari 直開修改版，內建骰子永遠 6 與訓練點數無限。">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,7 +49,7 @@ html,body{min-height:100%;background:#081510}
   <div class="loader-card">
     <div class="loader-ball">⚾</div>
     <b>正在載入 YaKyoLife Safari 直開修改版…</b>
-    <span>v1.4.5 + MOD v0.7</span>
+    <span>v1.4.5 + MOD v0.9</span>
   </div>
 </div>
 
@@ -63,7 +63,7 @@ html,body{min-height:100%;background:#081510}
 
     <div class="mod-standalone-badge">
       <b>Safari 直開修改版</b>
-      <span>🎲 骰子永遠 6 ＋ 🏋️ 訓練點數無限</span>
+      <span>🎲 永遠 6 ＋ 🏋️ 無限訓練 ＋ 💃 專屬事件 ＋ 🚀 能力 99</span>
     </div>
 
     <div class="field"><label for="in-name">球員資料</label>
@@ -115,7 +115,7 @@ html,body{min-height:100%;background:#081510}
       / Produced by 最先生 Mr.TheMost<br>
       Safari 直開修改版 · 非商業用途 · CC BY-NC 4.0
     </footer>
-    <div id="ver-badge">v1.4.5 · MOD v0.7</div>
+    <div id="ver-badge">v1.4.5 · MOD v0.9</div>
   </div>
 </div>
 
@@ -178,6 +178,9 @@ html,body{min-height:100%;background:#081510}
 })();
 </script>
 
+<script type="importmap">
+{"imports": {"https://cdn.jsdelivr.net/gh/LeoGGcat/yakyulife@3c03e96579d906561ee914fba994ebc9adcce480/src/core/rng.js": "data:text/javascript;charset=utf-8,export%20%2A%20from%20%27https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FLeoGGcat%2Fyakyulife%403c03e96579d906561ee914fba994ebc9adcce480%2Fsrc%2Fcore%2Frng.js%3Forig%3D1%27%3B%0Aimport%20%2A%20as%20orig%20from%20%27https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FLeoGGcat%2Fyakyulife%403c03e96579d906561ee914fba994ebc9adcce480%2Fsrc%2Fcore%2Frng.js%3Forig%3D1%27%3B%0Aexport%20function%20clamp%28v%2C%20lo%2C%20hi%29%20%7B%0A%20%20return%20orig.clamp%28v%2C%20lo%2C%20hi%20%3D%3D%3D%2080%20%3F%2099%20%3A%20hi%29%3B%0A%7D%0A", "https://cdn.jsdelivr.net/gh/LeoGGcat/yakyulife@3c03e96579d906561ee914fba994ebc9adcce480/src/engine/ability.js": "data:text/javascript;charset=utf-8,export%20%2A%20from%20%27https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FLeoGGcat%2Fyakyulife%403c03e96579d906561ee914fba994ebc9adcce480%2Fsrc%2Fengine%2Fability.js%3Forig%3D1%27%3B%0Aimport%20%7B%20S%20%7D%20from%20%27https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FLeoGGcat%2Fyakyulife%403c03e96579d906561ee914fba994ebc9adcce480%2Fsrc%2Fcore%2Fstate.js%27%3B%0Aimport%20%7B%20clamp%20%7D%20from%20%27https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FLeoGGcat%2Fyakyulife%403c03e96579d906561ee914fba994ebc9adcce480%2Fsrc%2Fcore%2Frng.js%27%3B%0A%0Aexport%20function%20abCost%28k%29%20%7B%0A%20%20const%20cur%3DS.ab%5Bk%5D%2C%20pk%3D%28S.pot%26%26S.pot%5Bk%5D%29%7C%7C62%2C%20isP%3DS.pos%3D%3D%3D%27P%27%3B%0A%20%20let%20c%3DisP%3F%28cur%3E%3D66%3F7%3Acur%3E%3D58%3F4%3Acur%3E%3D50%3F2%3A1%29%3A%28cur%3E%3D72%3F3%3Acur%3E%3D64%3F2%3A1%29%3B%0A%20%20if%28cur%3E%3Dpk%29c%2A%3DisP%3F4%3A3%3B%0A%20%20return%20c%3B%0A%7D%0Aexport%20function%20normalizeAbCarry%28k%29%20%7B%0A%20%20if%28%21S%20%7C%7C%20%21S.ab%20%7C%7C%20%21%28k%20in%20S.ab%29%29%20return%200%3B%0A%20%20if%28%21S.carry%29%20S.carry%3D%7B%7D%3B%0A%20%20S.ab%5Bk%5D%3Dclamp%28Math.round%28Number%28S.ab%5Bk%5D%29%7C%7C1%29%2C1%2C99%29%3B%0A%20%20const%20cost%3DabCost%28k%29%3B%0A%20%20S.carry%5Bk%5D%3Dclamp%28Math.floor%28Number%28S.carry%5Bk%5D%29%7C%7C0%29%2C0%2CMath.max%280%2Ccost-1%29%29%3B%0A%20%20return%20S.carry%5Bk%5D%3B%0A%7D%0Aexport%20function%20addAb%28k%2Cv%29%20%7B%0A%20%20if%28%21S%20%7C%7C%20%21S.ab%20%7C%7C%20%21%28k%20in%20S.ab%29%29return%200%3B%0A%20%20normalizeAbCarry%28k%29%3B%0A%20%20const%20o%3DS.ab%5Bk%5D%3B%0A%20%20S.lastOverflow%3D0%3B%0A%20%20if%28v%3C0%29%20%7B%0A%20%20%20%20S.ab%5Bk%5D%3Dclamp%28o%2Bv%2C1%2C99%29%3B%0A%20%20%20%20return%20S.ab%5Bk%5D-o%3B%0A%20%20%7D%0A%20%20if%28%21S.carry%29S.carry%3D%7B%7D%3B%0A%20%20let%20cur%3Do%2Cbud%3Dv%2B%28S.carry%5Bk%5D%7C%7C0%29%3B%0A%20%20const%20pk%3D%28S%26%26S.pot%26%26S.pot%5Bk%5D%29%7C%7C62%3B%0A%20%20const%20isP%3DS%26%26S.pos%3D%3D%3D%27P%27%3B%0A%20%20while%28bud%3E0%26%26cur%3C99%29%20%7B%0A%20%20%20%20let%20cost%3DisP%3F%28cur%3E%3D66%3F7%3Acur%3E%3D58%3F4%3Acur%3E%3D50%3F2%3A1%29%3A%28cur%3E%3D72%3F3%3Acur%3E%3D64%3F2%3A1%29%3B%0A%20%20%20%20if%28cur%3E%3Dpk%29cost%2A%3DisP%3F4%3A3%3B%0A%20%20%20%20if%28bud%3E%3Dcost%29%7Bbud-%3Dcost%3Bcur%2B%2B%3B%7D%20else%20break%3B%0A%20%20%7D%0A%20%20if%28cur%3E%3D99%29%20S.lastOverflow%3Dbud%3B%0A%20%20S.carry%5Bk%5D%3Dcur%3E%3D99%3F0%3Abud%3B%0A%20%20S.ab%5Bk%5D%3Dcur%3B%0A%20%20return%20cur-o%3B%0A%7D%0Aexport%20function%20addAbStat%28k%2Camt%29%20%7B%0A%20%20if%28amt%3C%3D0%29return%20addAb%28k%2Camt%29%3B%0A%20%20const%20pk%3DMath.min%2899%2C%28S.pot%26%26S.pot%5Bk%5D%29%7C%7C62%29%3B%0A%20%20const%20isP%3DS.pos%3D%3D%3D%27P%27%3B%0A%20%20let%20cur%3DS.ab%5Bk%5D%2C%20bud%3Damt%2C%20cr%3D%28S.carry%26%26S.carry%5Bk%5D%29%7C%7C0%2C%20gained%3D0%3B%0A%20%20if%28cur%3E%3Dpk%29%7B%20S.pendStat%3D%28S.pendStat%7C%7C0%29%2Bbud%3B%20return%200%3B%20%7D%0A%20%20while%28bud%3E0%20%26%26%20cur%3Cpk%20%26%26%20cur%3C99%29%20%7B%0A%20%20%20%20let%20c%3DisP%3F%28cur%3E%3D66%3F7%3Acur%3E%3D58%3F4%3Acur%3E%3D50%3F2%3A1%29%3A%28cur%3E%3D72%3F3%3Acur%3E%3D64%3F2%3A1%29%3B%0A%20%20%20%20bud--%3B%20cr%2B%2B%3B%0A%20%20%20%20if%28cr%3E%3Dc%29%7B%20cr-%3Dc%3B%20cur%2B%2B%3B%20gained%2B%2B%3B%20%7D%0A%20%20%7D%0A%20%20if%28%21S.carry%29S.carry%3D%7B%7D%3B%0A%20%20S.carry%5Bk%5D%3Dcur%3E%3D99%3F0%3Acr%3B%0A%20%20S.ab%5Bk%5D%3DMath.min%2899%2Ccur%29%3B%0A%20%20if%28bud%3E0%29S.pendStat%3D%28S.pendStat%7C%7C0%29%2Bbud%3B%0A%20%20return%20gained%3B%0A%7D%0A", "https://cdn.jsdelivr.net/gh/LeoGGcat/yakyulife@3c03e96579d906561ee914fba994ebc9adcce480/src/flow/love.js": "data:text/javascript;charset=utf-8,export%20%2A%20from%20%27https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FLeoGGcat%2Fyakyulife%403c03e96579d906561ee914fba994ebc9adcce480%2Fsrc%2Fflow%2Flove.js%3Forig%3D1%27%3B%0Aimport%20%2A%20as%20orig%20from%20%27https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FLeoGGcat%2Fyakyulife%403c03e96579d906561ee914fba994ebc9adcce480%2Fsrc%2Fflow%2Flove.js%3Forig%3D1%27%3B%0Aimport%20%7B%20S%20%7D%20from%20%27https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FLeoGGcat%2Fyakyulife%403c03e96579d906561ee914fba994ebc9adcce480%2Fsrc%2Fcore%2Fstate.js%27%3B%0Aimport%20%7B%20R%2C%20pick%2C%20chance%20%7D%20from%20%27https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FLeoGGcat%2Fyakyulife%403c03e96579d906561ee914fba994ebc9adcce480%2Fsrc%2Fcore%2Frng.js%27%3B%0Aimport%20%7B%20ABL%2C%20POS_AB%20%7D%20from%20%27https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FLeoGGcat%2Fyakyulife%403c03e96579d906561ee914fba994ebc9adcce480%2Fsrc%2Fdata%2Fabilities.js%27%3B%0Aimport%20%7B%20card%2C%20choose%2C%20board%20%7D%20from%20%27https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FLeoGGcat%2Fyakyulife%403c03e96579d906561ee914fba994ebc9adcce480%2Fsrc%2Fui%2Fdom.js%27%3B%0Aimport%20%7B%20addAb%20%7D%20from%20%27https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FLeoGGcat%2Fyakyulife%403c03e96579d906561ee914fba994ebc9adcce480%2Fsrc%2Fengine%2Fability.js%27%3B%0A%0Aconst%20CHEER_ON%3D%27ykl-mod-cheerboost-v1%27%3B%0Aconst%20AFFAIR_ON%3D%27ykl-mod-affairboost-v1%27%3B%0Aconst%20CHEER_RATE%3D%27ykl-mod-cheerrate-v1%27%3B%0Aconst%20AFFAIR_RATE%3D%27ykl-mod-affairrate-v1%27%3B%0Aconst%20CAUGHT_RATE%3D%27ykl-mod-caughtrate-v1%27%3B%0Aconst%20RESULT_MODE%3D%27ykl-mod-affairresult-v1%27%3B%0Aconst%20SUCCESS_REWARD%3D%27ykl-mod-affairreward-v1%27%3B%0A%0Afunction%20ls%28k%2Cd%29%7B%20try%7B%20const%20v%3DlocalStorage.getItem%28k%29%3B%20return%20v%3D%3D%3Dnull%3Fd%3Av%3B%20%7Dcatch%28e%29%7B%20return%20d%3B%20%7D%20%7D%0Afunction%20on%28k%29%7B%20return%20ls%28k%2C%270%27%29%3D%3D%3D%271%27%3B%20%7D%0Afunction%20num%28k%2Cd%29%7B%20const%20n%3DNumber%28ls%28k%2CString%28d%29%29%29%3B%20return%20Number.isFinite%28n%29%3FMath.max%280%2CMath.min%28100%2Cn%29%29%3Ad%3B%20%7D%0Afunction%20resultMode%28%29%7B%20return%20ls%28RESULT_MODE%2C%27normal%27%29%3B%20%7D%0Afunction%20rewardPts%28%29%7B%20const%20n%3DNumber%28ls%28SUCCESS_REWARD%2C%272%27%29%29%3B%20return%20Math.max%280%2CMath.min%285%2CNumber.isFinite%28n%29%3Fn%3A2%29%29%3B%20%7D%0Afunction%20randomAbility%28delta%29%7B%0A%20%20const%20k%3Dpick%28POS_AB%5BS.pos%5D%29%3B%0A%20%20const%20g%3DaddAb%28k%2Cdelta%29%3B%0A%20%20board%281%29%3B%0A%20%20return%20%60%24%7BABL%5Bk%5D%7D%20%24%7Bg%3E%3D0%3F%27%2B%27%3A%27%27%7D%24%7Bg%7D%60%3B%0A%7D%0Afunction%20startDating%28p%29%7B%0A%20%20const%20L%3DS.love%3B%0A%20%20L.st%3D%27dating%27%3B%20L.partner%3Dp%3B%20L.dyrs%3D0%3B%20L.datedTimes%3D%28L.datedTimes%7C%7C0%29%2B1%3B%0A%7D%0A%0Afunction%20cheerExclusive%28next%29%7B%0A%20%20const%20L%3DS.love%2C%20p%3Dpick%28orig.datePool%28%29%29%3B%0A%20%20const%20r%3DR%28%29%2A100%3B%0A%20%20if%28r%3C34%29%7B%0A%20%20%20%20card%28%27info%27%2C%27%E5%95%A6%E5%95%A6%E9%9A%8A%E5%B0%88%E5%B1%AC%E4%BA%8B%E4%BB%B6%E3%83%BB%E8%B3%BD%E5%BE%8C%E5%90%88%E7%85%A7%27%2C%60%E4%B8%BB%E5%A0%B4%E5%8B%9D%E5%88%A9%E5%BE%8C%EF%BC%8C%E5%95%A6%E5%95%A6%E9%9A%8A%E5%A5%B3%E5%AD%A9%20%3Cb%20class%3D%22hl%22%3E%24%7Bp%7D%3C%2Fb%3E%20%E5%9C%A8%E7%90%83%E5%93%A1%E9%80%9A%E9%81%93%E5%8F%AB%E4%BD%8F%E4%BD%A0%EF%BC%9A%E3%80%8C%E5%8F%AF%E4%BB%A5%E4%B8%80%E8%B5%B7%E6%8B%8D%E4%B8%80%E5%BC%B5%E5%97%8E%EF%BC%9F%E3%80%8D%60%29%3B%0A%20%20%20%20choose%28%27%E6%8B%8D%E5%AE%8C%E7%85%A7%E5%BE%8C%EF%BC%8C%E5%A5%B9%E5%B0%8F%E8%81%B2%E5%95%8F%E4%BD%A0%E8%A6%81%E4%B8%8D%E8%A6%81%E4%BA%A4%E6%8F%9B%E8%81%AF%E7%B5%A1%E6%96%B9%E5%BC%8F%E3%80%82%27%2C%5B%0A%20%20%20%20%20%20%7Bt%3A%27%E4%BA%A4%E6%8F%9B%E8%81%AF%E7%B5%A1%E6%96%B9%E5%BC%8F%27%2Cmain%3Atrue%2Cs%3A%27%E6%9C%89%E6%A9%9F%E6%9C%83%E7%99%BC%E5%B1%95%E6%88%90%E6%88%80%E6%83%85%27%2Cf%3A%28%29%3D%3E%7B%0A%20%20%20%20%20%20%20%20if%28chance%2872%29%29%7B%20startDating%28p%29%3B%20const%20gt%3DrandomAbility%281%29%3B%20card%28%27gold%27%2C%27%E7%A7%81%E8%A8%8A%E5%BE%9E%E9%80%99%E8%A3%A1%E9%96%8B%E5%A7%8B%27%2C%60%E7%95%B6%E6%99%9A%20%3Cb%20class%3D%22hl%22%3E%24%7Bp%7D%3C%2Fb%3E%20%E5%82%B3%E4%BE%86%E7%85%A7%E7%89%87%E3%80%82%E5%B9%BE%E9%80%B1%E5%BE%8C%EF%BC%8C%E4%BD%A0%E5%80%91%E9%96%8B%E5%A7%8B%E5%9B%BA%E5%AE%9A%E7%B4%84%E6%9C%83%E2%80%94%E2%80%94%3Cb%20class%3D%22up%22%3E%24%7Bgt%7D%3C%2Fb%3E%E3%80%82%60%29%3B%20%7D%0A%20%20%20%20%20%20%20%20else%20card%28%27info%27%2C%27%E4%BF%9D%E6%8C%81%E8%81%AF%E7%B5%A1%27%2C%27%E4%BD%A0%E5%80%91%E4%BA%92%E5%8A%A0%E4%BA%86%E8%81%AF%E7%B5%A1%E6%96%B9%E5%BC%8F%EF%BC%8C%E4%BD%86%E8%A1%8C%E7%A8%8B%E7%B8%BD%E6%98%AF%E9%8C%AF%E9%96%8B%E3%80%82%27%29%3B%0A%20%20%20%20%20%20%20%20next%28%29%3B%0A%20%20%20%20%20%20%7D%7D%2C%0A%20%20%20%20%20%20%7Bt%3A%27%E7%A6%AE%E8%B2%8C%E9%81%93%E8%AC%9D%EF%BC%8C%E4%BF%9D%E6%8C%81%E8%B7%9D%E9%9B%A2%27%2Cs%3A%27%E5%B0%88%E6%B3%A8%E7%90%83%E5%A0%B4%27%2Cf%3A%28%29%3D%3E%7B%20const%20gt%3DrandomAbility%281%29%3B%20card%28%27good%27%2C%27%E6%8A%8A%E5%BF%83%E7%95%99%E5%9C%A8%E7%90%83%E5%A0%B4%27%2C%60%E4%BD%A0%E6%8A%8A%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%8B%89%E5%9B%9E%E4%B8%8B%E4%B8%80%E5%A0%B4%E6%AF%94%E8%B3%BD%E2%80%94%E2%80%94%3Cb%20class%3D%22up%22%3E%24%7Bgt%7D%3C%2Fb%3E%E3%80%82%60%29%3B%20next%28%29%3B%20%7D%7D%0A%20%20%20%20%5D%29%3B%20return%3B%0A%20%20%7D%0A%20%20if%28r%3C67%29%7B%0A%20%20%20%20card%28%27info%27%2C%27%E5%95%A6%E5%95%A6%E9%9A%8A%E5%B0%88%E5%B1%AC%E4%BA%8B%E4%BB%B6%E3%83%BB%E5%85%AC%E7%9B%8A%E6%B4%BB%E5%8B%95%27%2C%60%E7%90%83%E5%9C%98%E5%AE%89%E6%8E%92%E4%BD%A0%E5%92%8C%20%3Cb%20class%3D%22hl%22%3E%24%7Bp%7D%3C%2Fb%3E%20%E4%B8%80%E8%B5%B7%E5%8F%83%E5%8A%A0%E5%85%92%E7%AB%A5%E6%A3%92%E7%90%83%E5%85%AC%E7%9B%8A%E6%97%A5%EF%BC%8C%E5%85%A9%E4%BA%BA%E6%84%8F%E5%A4%96%E5%9C%B0%E5%BE%88%E6%9C%89%E9%BB%98%E5%A5%91%E3%80%82%60%29%3B%0A%20%20%20%20choose%28%27%E6%B4%BB%E5%8B%95%E7%B5%90%E6%9D%9F%E5%BE%8C%EF%BC%8C%E5%A5%B9%E5%95%8F%EF%BC%9A%E3%80%8C%E8%A6%81%E4%B8%8D%E8%A6%81%E4%B8%80%E8%B5%B7%E5%90%83%E9%BB%9E%E6%9D%B1%E8%A5%BF%EF%BC%9F%E3%80%8D%27%2C%5B%0A%20%20%20%20%20%20%7Bt%3A%27%E4%B8%80%E8%B5%B7%E5%8E%BB%E5%90%83%E5%AE%B5%E5%A4%9C%27%2Cmain%3Atrue%2Cs%3A%27%E5%A2%9E%E5%8A%A0%E7%86%9F%E8%AD%98%E6%A9%9F%E6%9C%83%27%2Cf%3A%28%29%3D%3E%7B%0A%20%20%20%20%20%20%20%20if%28chance%2865%29%29%7B%20startDating%28p%29%3B%20const%20gt%3DrandomAbility%281%29%3B%20card%28%27gold%27%2C%27%E7%90%83%E5%A0%B4%E5%A4%96%E7%9A%84%E9%BB%98%E5%A5%91%27%2C%60%E4%BD%A0%E5%80%91%E9%96%8B%E5%A7%8B%E4%BA%A4%E5%BE%80%E2%80%94%E2%80%94%3Cb%20class%3D%22up%22%3E%24%7Bgt%7D%3C%2Fb%3E%E3%80%82%60%29%3B%20%7D%0A%20%20%20%20%20%20%20%20else%20card%28%27info%27%2C%27%E6%9C%8B%E5%8F%8B%E4%BB%A5%E4%B8%8A%E6%9C%AA%E6%BB%BF%27%2C%27%E8%81%8A%E5%BE%97%E5%BE%88%E9%96%8B%E5%BF%83%EF%BC%8C%E4%BD%86%E5%85%A9%E4%BA%BA%E7%9A%84%E6%99%82%E9%96%93%E5%A7%8B%E7%B5%82%E5%B0%8D%E4%B8%8D%E4%B8%8A%E3%80%82%27%29%3B%0A%20%20%20%20%20%20%20%20next%28%29%3B%0A%20%20%20%20%20%20%7D%7D%2C%0A%20%20%20%20%20%20%7Bt%3A%27%E5%A9%89%E6%8B%92%EF%BC%8C%E6%98%8E%E5%A4%A9%E9%82%84%E8%A6%81%E8%A8%93%E7%B7%B4%27%2Cf%3A%28%29%3D%3E%7B%20const%20gt%3DrandomAbility%281%29%3B%20card%28%27good%27%2C%27%E8%87%AA%E5%BE%8B%E8%A1%8C%E7%A8%8B%27%2C%60%E4%BD%A0%E6%BA%96%E6%99%82%E5%9B%9E%E9%A3%AF%E5%BA%97%E4%BC%91%E6%81%AF%E2%80%94%E2%80%94%3Cb%20class%3D%22up%22%3E%24%7Bgt%7D%3C%2Fb%3E%E3%80%82%60%29%3B%20next%28%29%3B%20%7D%7D%0A%20%20%20%20%5D%29%3B%20return%3B%0A%20%20%7D%0A%20%20card%28%27info%27%2C%27%E5%95%A6%E5%95%A6%E9%9A%8A%E5%B0%88%E5%B1%AC%E4%BA%8B%E4%BB%B6%E3%83%BB%E7%A4%BE%E7%BE%A4%E4%BC%81%E5%8A%83%27%2C%60%E8%B4%8A%E5%8A%A9%E5%95%86%E5%AE%89%E6%8E%92%E4%BD%A0%E5%92%8C%20%3Cb%20class%3D%22hl%22%3E%24%7Bp%7D%3C%2Fb%3E%20%E6%8B%8D%E3%80%8C%E4%B8%80%E6%97%A5%E6%90%AD%E6%AA%94%E3%80%8D%E7%9F%AD%E5%BD%B1%E9%9F%B3%EF%BC%8C%E7%95%99%E8%A8%80%E5%8D%80%E5%BE%88%E5%BF%AB%E8%A2%AB%E3%80%8C%E5%9C%A8%E4%B8%80%E8%B5%B7%E3%80%8D%E6%B4%97%E7%89%88%E3%80%82%60%29%3B%0A%20%20choose%28%27%E6%8B%8D%E6%94%9D%E7%B5%90%E6%9D%9F%EF%BC%8C%E5%A5%B9%E7%AC%91%E8%91%97%E5%95%8F%EF%BC%9A%E3%80%8C%E5%A4%A7%E5%AE%B6%E9%83%BD%E9%80%99%E6%A8%A3%E8%AA%AA%E4%BA%86%EF%BC%8C%E4%BD%A0%E6%80%8E%E9%BA%BC%E7%9C%8B%EF%BC%9F%E3%80%8D%27%2C%5B%0A%20%20%20%20%7Bt%3A%27%E9%A0%86%E5%8B%A2%E7%B4%84%E5%A5%B9%E4%B8%8B%E6%AC%A1%E5%96%AE%E7%8D%A8%E5%90%83%E9%A3%AF%27%2Cmain%3Atrue%2Cf%3A%28%29%3D%3E%7B%0A%20%20%20%20%20%20if%28chance%2868%29%29%7B%20startDating%28p%29%3B%20const%20gt%3DrandomAbility%281%29%3B%20card%28%27gold%27%2C%27%E5%81%87%E6%88%B2%E6%88%90%E7%9C%9F%27%2C%60%E4%B8%8B%E4%B8%80%E6%AC%A1%E8%A6%8B%E9%9D%A2%E6%B2%92%E6%9C%89%E6%94%9D%E5%BD%B1%E6%A9%9F%E3%80%82%E4%BD%A0%E5%80%91%E6%AD%A3%E5%BC%8F%E9%96%8B%E5%A7%8B%E7%B4%84%E6%9C%83%E2%80%94%E2%80%94%3Cb%20class%3D%22up%22%3E%24%7Bgt%7D%3C%2Fb%3E%E3%80%82%60%29%3B%20%7D%0A%20%20%20%20%20%20else%20card%28%27info%27%2C%27%E9%82%84%E6%98%AF%E5%B7%A5%E4%BD%9C%E5%A4%A5%E4%BC%B4%27%2C%27%E5%A5%B9%E7%AC%91%E8%91%97%E5%B2%94%E9%96%8B%E8%A9%B1%E9%A1%8C%EF%BC%8C%E4%BC%81%E5%8A%83%E5%BE%88%E6%88%90%E5%8A%9F%EF%BC%8C%E4%BD%86%E6%88%80%E6%83%85%E6%B2%92%E6%9C%89%E6%88%90%E7%9C%9F%E3%80%82%27%29%3B%0A%20%20%20%20%20%20next%28%29%3B%0A%20%20%20%20%7D%7D%2C%0A%20%20%20%20%7Bt%3A%27%E7%AC%91%E8%AA%AA%E5%8F%AA%E6%98%AF%E5%B7%A5%E4%BD%9C%E6%95%88%E6%9E%9C%27%2Cf%3A%28%29%3D%3E%7B%20card%28%27info%27%2C%27%E8%A9%B1%E9%A1%8C%E9%80%80%E7%87%92%27%2C%27%E4%BD%A0%E6%8A%8A%E8%A9%B1%E9%A1%8C%E7%95%99%E5%9C%A8%E9%8F%A1%E9%A0%AD%E8%A3%A1%EF%BC%8C%E5%B9%BE%E5%A4%A9%E5%BE%8C%E7%86%B1%E6%90%9C%E8%87%AA%E7%84%B6%E9%80%80%E5%8E%BB%E3%80%82%27%29%3B%20next%28%29%3B%20%7D%7D%0A%20%20%5D%29%3B%0A%7D%0A%0Afunction%20cheerDatingEvent%28next%29%7B%0A%20%20const%20L%3DS.love%2C%20k%3Dpick%28POS_AB%5BS.pos%5D%29%2C%20g%3DaddAb%28k%2C1%29%3B%20board%281%29%3B%0A%20%20card%28%27good%27%2C%27%E5%95%A6%E5%95%A6%E9%9A%8A%E5%B0%88%E5%B1%AC%E4%BA%8B%E4%BB%B6%E3%83%BB%E9%A9%9A%E5%96%9C%E6%87%89%E6%8F%B4%27%2C%60%E4%B8%BB%E5%A0%B4%E8%B3%BD%E5%89%8D%EF%BC%8C%3Cb%20class%3D%22hl%22%3E%24%7BL.partner%7D%3C%2Fb%3E%20%E6%82%84%E6%82%84%E6%8A%8A%E4%BD%A0%E7%9A%84%E8%83%8C%E8%99%9F%E5%81%9A%E6%88%90%E6%87%89%E6%8F%B4%E7%89%8C%E2%80%94%E2%80%94%3Cb%20class%3D%22up%22%3E%24%7BABL%5Bk%5D%7D%20%2B%24%7Bg%7D%3C%2Fb%3E%E3%80%82%60%29%3B%0A%20%20next%28%29%3B%0A%7D%0A%0Afunction%20divorceNow%28%29%7B%0A%20%20const%20L%3DS.love%2C%20ex%3DL.partner%3B%0A%20%20L.exes%3DL.exes%7C%7C%5B%5D%3B%20L.exes.push%28%7Bname%3Aex%2Ckids%3AL.kids%7C%7C0%7D%29%3B%0A%20%20L.st%3D%27divorced%27%3B%20L.partner%3Dnull%3B%20L.kids%3D0%3B%20L.dyrs%3D0%3B%0A%20%20return%20ex%3B%0A%7D%0A%0Afunction%20affairCaught%28next%29%7B%0A%20%20const%20L%3DS.love%2C%20mode%3DresultMode%28%29%3B%0A%20%20L.caught%3D%28L.caught%7C%7C0%29%2B1%3B%0A%20%20if%28mode%3D%3D%3D%27light%27%29%7B%0A%20%20%20%20const%20loss%3DrandomAbility%28-1%29%3B%0A%20%20%20%20card%28%27bad%27%2C%27%E5%A4%96%E9%81%87%E6%9B%9D%E5%85%89%E3%83%BB%E8%BC%95%E5%BE%AE%E5%BE%8C%E6%9E%9C%27%2C%60%E8%A8%8A%E6%81%AF%E6%88%AA%E5%9C%96%E6%B5%81%E5%87%BA%EF%BC%8C%E4%BD%86%E5%A9%9A%E5%A7%BB%E6%9A%AB%E6%99%82%E4%BF%9D%E4%BD%8F%E2%80%94%E2%80%94%3Cb%20class%3D%22dn%22%3E%24%7Bloss%7D%3C%2Fb%3E%E3%80%82%60%29%3B%0A%20%20%20%20next%28%29%3B%20return%3B%0A%20%20%7D%0A%20%20if%28mode%3D%3D%3D%27severe%27%29%7B%0A%20%20%20%20POS_AB%5BS.pos%5D.forEach%28k%3D%3EaddAb%28k%2C-5%29%29%3B%0A%20%20%20%20const%20ex%3DdivorceNow%28%29%3B%20board%281%29%3B%0A%20%20%20%20card%28%27bad%27%2C%27%E5%A4%96%E9%81%87%E6%9B%9D%E5%85%89%E3%83%BB%E6%9C%80%E5%9A%B4%E9%87%8D%E7%B5%90%E6%9E%9C%27%2C%60%E7%85%A7%E7%89%87%E8%88%87%E5%B0%8D%E8%A9%B1%E4%B8%80%E6%AC%A1%E6%9B%9D%E5%85%89%EF%BC%8C%3Cb%20class%3D%22hl%22%3E%24%7Bex%7D%3C%2Fb%3E%20%E7%9B%B4%E6%8E%A5%E6%8F%90%E5%87%BA%E9%9B%A2%E5%A9%9A%E3%80%82%3Cb%20class%3D%22dn%22%3E%E5%85%A8%E8%83%BD%E5%8A%9B%20%E2%88%925%3C%2Fb%3E%E3%80%82%60%29%3B%0A%20%20%20%20next%28%29%3B%20return%3B%0A%20%20%7D%0A%20%20const%20loss%3DrandomAbility%28-3%29%3B%0A%20%20if%28chance%2850%29%29%20card%28%27bad%27%2C%27%E5%A4%96%E9%81%87%E6%9B%9D%E5%85%89%E3%83%BB%E5%A9%9A%E5%A7%BB%E5%8D%B1%E6%A9%9F%27%2C%60%E7%8B%97%E4%BB%94%E6%8B%8D%E5%88%B0%E4%BD%A0%E6%B7%B1%E5%A4%9C%E9%9B%A2%E9%96%8B%E9%A3%AF%E5%BA%97%E2%80%94%E2%80%94%3Cb%20class%3D%22dn%22%3E%24%7Bloss%7D%3C%2Fb%3E%E3%80%82%E4%BC%B4%E4%BE%B6%E6%9A%AB%E6%99%82%E6%B2%92%E6%9C%89%E9%9B%A2%E9%96%8B%EF%BC%8C%E4%BD%86%E4%BF%A1%E4%BB%BB%E5%B9%BE%E4%B9%8E%E6%AD%B8%E9%9B%B6%E3%80%82%60%29%3B%0A%20%20else%20%7B%20const%20ex%3DdivorceNow%28%29%3B%20board%281%29%3B%20card%28%27bad%27%2C%27%E5%A4%96%E9%81%87%E6%9B%9D%E5%85%89%E3%83%BB%E9%9B%A2%E5%A9%9A%27%2C%60%E8%AD%89%E6%93%9A%E7%99%BB%E4%B8%8A%E9%A0%AD%E7%89%88%EF%BC%8C%3Cb%20class%3D%22hl%22%3E%24%7Bex%7D%3C%2Fb%3E%20%E6%B1%BA%E5%AE%9A%E7%B5%90%E6%9D%9F%E5%A9%9A%E5%A7%BB%E2%80%94%E2%80%94%3Cb%20class%3D%22dn%22%3E%24%7Bloss%7D%3C%2Fb%3E%E3%80%82%60%29%3B%20%7D%0A%20%20next%28%29%3B%0A%7D%0A%0Afunction%20marriedEvent%28next%29%7B%0A%20%20const%20L%3DS.love%3B%0A%20%20const%20fire%3DL.kids%3D%3D%3D0%3F40%3A30%3B%0A%20%20if%28%21chance%28fire%29%29%7B%20next%28%29%3B%20return%3B%20%7D%0A%20%20if%28L.kids%3C4%20%26%26%20chance%28%5B65%2C45%2C30%2C20%5D%5BL.kids%5D%29%29%7B%0A%20%20%20%20L.kids%2B%2B%3B%20const%20gt%3DrandomAbility%282%29%3B%0A%20%20%20%20card%28%27gold%27%2C%27%E6%96%B0%E7%94%9F%E5%91%BD%27%2C%60%24%7BL.partner%7D%20%E5%B9%B3%E5%AE%89%E7%94%9F%E4%B8%8B%E4%BD%A0%E5%80%91%E7%9A%84%E7%AC%AC%20%3Cb%20class%3D%22hl%22%3E%24%7BL.kids%7D%3C%2Fb%3E%20%E5%80%8B%E5%AD%A9%E5%AD%90%E2%80%94%E2%80%94%3Cb%20class%3D%22up%22%3E%24%7Bgt%7D%3C%2Fb%3E%E3%80%82%60%29%3B%0A%20%20%20%20next%28%29%3B%20return%3B%0A%20%20%7D%0A%20%20if%28chance%28num%28AFFAIR_RATE%2C55%29%29%29%7B%0A%20%20%20%20const%20pool%3Dorig.affairPool%28%29.filter%28n%3D%3En%21%3D%3DL.partner%29%3B%0A%20%20%20%20const%20t%3Dpool.length%3Fpick%28pool%29%3A%27%E4%B8%80%E4%BD%8D%E5%95%A6%E5%95%A6%E9%9A%8A%E5%A5%B3%E5%AD%A9%27%3B%0A%20%20%20%20choose%28%60%E5%AE%A2%E5%A0%B4%E9%A3%AF%E5%BA%97%E9%85%92%E5%90%A7%EF%BC%8C%24%7Bt%7D%20%E5%82%B3%E4%BE%86%E8%A8%8A%E6%81%AF%EF%BC%9A%E3%80%8C%E7%9D%A1%E4%BA%86%E5%97%8E%EF%BC%9F%E3%80%8D%60%2C%5B%0A%20%20%20%20%20%20%7Bt%3A%27%E8%B5%B4%E7%B4%84%27%2Cwarn%3Atrue%2Cs%3A%60%E8%A2%AB%E6%8A%93%E6%A9%9F%E7%8E%87%EF%BC%9A%24%7Bnum%28CAUGHT_RATE%2C45%29%7D%25%60%2Cf%3A%28%29%3D%3E%7B%0A%20%20%20%20%20%20%20%20L.affairs%3D%28L.affairs%7C%7C0%29%2B1%3B%0A%20%20%20%20%20%20%20%20if%28chance%28num%28CAUGHT_RATE%2C45%29%29%29%7B%20affairCaught%28next%29%3B%20return%3B%20%7D%0A%20%20%20%20%20%20%20%20const%20pts%3DrewardPts%28%29%2C%20gt%3Dpts%3FrandomAbility%28pts%29%3A%27%E7%84%A1%E8%83%BD%E5%8A%9B%E8%AE%8A%E5%8C%96%27%3B%0A%20%20%20%20%20%20%20%20card%28%27bad%27%2C%27%E6%B2%92%E6%9C%89%E8%A2%AB%E6%8B%8D%E5%88%B0%27%2C%60%24%7Bpts%3F%60%E7%9F%AD%E6%9C%9F%E7%8B%80%E6%85%8B%E6%8F%90%E5%8D%87%E2%80%94%E2%80%94%3Cb%20class%3D%22up%22%3E%24%7Bgt%7D%3C%2Fb%3E%E3%80%82%60%3A%27%E6%B2%92%E6%9C%89%E9%A1%8D%E5%A4%96%E8%83%BD%E5%8A%9B%E7%8D%8E%E5%8B%B5%E3%80%82%27%7D%60%29%3B%0A%20%20%20%20%20%20%20%20next%28%29%3B%0A%20%20%20%20%20%20%7D%7D%2C%0A%20%20%20%20%20%20%7Bt%3A%27%E6%8B%92%E7%B5%95%E9%82%80%E7%B4%84%EF%BC%8C%E5%9B%9E%E5%AE%B6%E4%BA%BA%E8%A8%8A%E6%81%AF%27%2Cmain%3Atrue%2Cs%3A%27%E6%B2%92%E6%9C%89%E5%A4%96%E9%81%87%E9%A2%A8%E9%9A%AA%27%2Cf%3A%28%29%3D%3E%7B%20const%20gt%3DrandomAbility%281%29%3B%20card%28%27good%27%2C%27%E5%AE%B6%E7%9A%84%E6%96%B9%E5%90%91%27%2C%60%E4%BD%A0%E6%94%B9%E6%92%A5%E8%A6%96%E8%A8%8A%E5%9B%9E%E5%AE%B6%E2%80%94%E2%80%94%3Cb%20class%3D%22up%22%3E%24%7Bgt%7D%3C%2Fb%3E%E3%80%82%60%29%3B%20next%28%29%3B%20%7D%7D%0A%20%20%20%20%5D%29%3B%20return%3B%0A%20%20%7D%0A%20%20const%20gt%3DrandomAbility%281%29%3B%0A%20%20card%28%27good%27%2C%27%E5%AE%B6%E5%BA%AD%E6%97%A5%27%2C%60%E9%9B%A3%E5%BE%97%E6%B2%92%E6%9C%89%E5%A0%B4%E5%A4%96%E9%A2%A8%E6%B3%A2%E3%80%82%E4%BD%A0%E6%8A%8A%E4%BC%91%E6%81%AF%E6%97%A5%E5%AE%8C%E6%95%B4%E7%95%99%E7%B5%A6%E5%AE%B6%E4%BA%BA%E2%80%94%E2%80%94%3Cb%20class%3D%22up%22%3E%24%7Bgt%7D%3C%2Fb%3E%E3%80%82%60%29%3B%0A%20%20next%28%29%3B%0A%7D%0A%0Aexport%20function%20loveEvent%28next%29%7B%0A%20%20const%20s%3DS%3B%0A%20%20if%28%21s%20%7C%7C%20s.stage%21%3D%3D%27PRO%27%20%7C%7C%20s.age%3C20%20%7C%7C%20%21s.love%29%7B%20orig.loveEvent%28next%29%3B%20return%3B%20%7D%0A%20%20const%20L%3Ds.love%3B%0A%20%20if%28%28L.st%3D%3D%3D%27single%27%7C%7CL.st%3D%3D%3D%27divorced%27%29%20%26%26%20on%28CHEER_ON%29%20%26%26%20chance%28num%28CHEER_RATE%2C55%29%29%29%7B%20cheerExclusive%28%28%29%3D%3Eorig.loveEvent%28next%29%29%3B%20return%3B%20%7D%0A%20%20if%28L.st%3D%3D%3D%27dating%27%20%26%26%20on%28CHEER_ON%29%20%26%26%20orig.datePool%28%29.includes%28L.partner%29%20%26%26%20chance%28Math.round%28num%28CHEER_RATE%2C55%29%2F2%29%29%29%7B%20cheerDatingEvent%28%28%29%3D%3Eorig.loveEvent%28next%29%29%3B%20return%3B%20%7D%0A%20%20if%28L.st%3D%3D%3D%27married%27%20%26%26%20on%28AFFAIR_ON%29%29%7B%20marriedEvent%28next%29%3B%20return%3B%20%7D%0A%20%20orig.loveEvent%28next%29%3B%0A%7D%0A"}}
+</script>
 <script type="module" src="https://cdn.jsdelivr.net/gh/LeoGGcat/yakyulife@3c03e96579d906561ee914fba994ebc9adcce480/src/main.js"></script>
 <script>/*
   YaKyoLife compatibility / attribution:
@@ -233,6 +236,13 @@ html,body{min-height:100%;background:#081510}
     const BACKUP_KEY = 'ykl-modifier-backup-v1';
     const DICE6_KEY = 'ykl-modifier-dice6-v1';
     const TRAIN_INF_KEY = 'ykl-modifier-traininf-v1';
+    const CHEER_BOOST_KEY = 'ykl-mod-cheerboost-v1';
+    const AFFAIR_BOOST_KEY = 'ykl-mod-affairboost-v1';
+    const CHEER_RATE_KEY = 'ykl-mod-cheerrate-v1';
+    const AFFAIR_RATE_KEY = 'ykl-mod-affairrate-v1';
+    const CAUGHT_RATE_KEY = 'ykl-mod-caughtrate-v1';
+    const AFFAIR_RESULT_KEY = 'ykl-mod-affairresult-v1';
+    const AFFAIR_REWARD_KEY = 'ykl-mod-affairreward-v1';
     const _memStore = Object.create(null);
     const storage = {
       getItem(k){ try { return window.localStorage.getItem(k); } catch(e) { return _memStore[k] ?? null; } },
@@ -240,10 +250,13 @@ html,body{min-height:100%;background:#081510}
     };
     let dice6Enabled = storage.getItem(DICE6_KEY) === '1';
     let trainInfEnabled = storage.getItem(TRAIN_INF_KEY) === '1';
+    let cheerBoostEnabled = storage.getItem(CHEER_BOOST_KEY) === '1';
+    let affairBoostEnabled = storage.getItem(AFFAIR_BOOST_KEY) === '1';
     const processedDiceTops = new WeakSet();
     const diceUndo = [];
     let poolRefundGuard = false;
     let pendingPoolClick = null;
+    let high99Guard = false;
 
     const labels = {
       genius:'天才', iron:'鐵人', glass:'玻璃人',
@@ -268,6 +281,8 @@ html,body{min-height:100%;background:#081510}
           <button data-action="diamond">💎 超級球員</button>
           <button data-action="dice6" id="yklm-dice6">🎲 骰子永遠 6：關</button>
           <button data-action="traininf" id="yklm-traininf">🏋️ 訓練點數無限：關</button>
+          <button data-action="cheerboost" id="yklm-cheerboost">💃 啦啦隊專屬事件：關</button>
+          <button data-action="affairboost" id="yklm-affairboost">💔 外遇風險自訂：關</button>
           <button data-action="heal">🩹 清除傷病</button>
           <button data-action="awakening">🎲 覺醒門檻</button>
           <button data-action="refresh">↻ 重新讀取</button>
@@ -277,7 +292,7 @@ html,body{min-height:100%;background:#081510}
           <summary>目前能力值</summary>
           <div id="yklm-ab" class="yklm-grid"></div>
           <div class="yklm-mini-actions">
-            <button data-action="ab80">目前能力全 80</button>
+            <button data-action="ab80">目前能力全 99</button>
           </div>
         </details>
 
@@ -285,13 +300,32 @@ html,body{min-height:100%;background:#081510}
           <summary>潛力上限</summary>
           <div id="yklm-pot" class="yklm-grid"></div>
           <div class="yklm-mini-actions">
-            <button data-action="pot80">潛力全 80</button>
+            <button data-action="pot80">潛力全 99</button>
           </div>
         </details>
 
         <details>
           <summary>特質</summary>
           <div id="yklm-traits" class="yklm-traits"></div>
+        </details>
+
+        <details>
+          <summary>💞 感情事件設定</summary>
+          <div class="yklm-grid">
+            <label>啦啦隊專屬事件率 (%)</label><input id="yklm-cheerrate" type="number" min="0" max="100" step="5">
+            <label>外遇誘惑出現率 (%)</label><input id="yklm-affairrate" type="number" min="0" max="100" step="5">
+            <label>外遇被抓機率 (%)</label><input id="yklm-caughtrate" type="number" min="0" max="100" step="5">
+            <label>外遇成功獎勵</label><select id="yklm-affairreward">
+              <option value="0">無能力獎勵</option><option value="1">隨機能力 +1</option>
+              <option value="2">隨機能力 +2</option><option value="3">隨機能力 +3</option><option value="5">隨機能力 +5</option>
+            </select>
+            <label>被抓後果</label><select id="yklm-affairresult">
+              <option value="light">輕微：隨機能力 −1、婚姻保留</option>
+              <option value="normal">標準：隨機能力 −3、50% 離婚</option>
+              <option value="severe">嚴重：全能力 −5、必定離婚</option>
+            </select>
+          </div>
+          <div class="yklm-note">設定只套用「外遇風險自訂」開啟後的婚內事件。</div>
         </details>
 
         <details>
@@ -339,10 +373,11 @@ html,body{min-height:100%;background:#081510}
       #yklm-panel summary{cursor:pointer;font-weight:800;margin-bottom:8px}
       .yklm-grid{display:grid;grid-template-columns:1fr 88px;gap:6px 8px;align-items:center}
       .yklm-grid label{font-size:13px;color:#d7e6dc}
-      .yklm-grid input{
+      .yklm-grid input,.yklm-grid select{
         width:100%;box-sizing:border-box;border:1px solid #4b7258;background:#09170f;color:#fff;
         border-radius:7px;padding:6px 7px;text-align:right
       }
+      .yklm-grid select{text-align:left}
       .yklm-traits{display:grid;grid-template-columns:1fr 1fr;gap:7px}
       .yklm-trait{display:flex;align-items:center;gap:7px;background:#102a1b;padding:7px;border-radius:8px;font-size:12px}
       .yklm-trait input{accent-color:#57c378}
@@ -365,7 +400,7 @@ html,body{min-height:100%;background:#081510}
         .yklm-mini-actions{display:grid;grid-template-columns:1fr;gap:8px}
         .yklm-grid{grid-template-columns:1fr 96px;gap:8px 10px}
         .yklm-grid label{font-size:14px}
-        .yklm-grid input{min-height:42px;font-size:16px}
+        .yklm-grid input,.yklm-grid select{min-height:42px;font-size:16px}
         .yklm-traits{grid-template-columns:1fr 1fr;gap:8px}
         .yklm-trait{min-height:42px;font-size:13px}
         .yklm-note,.yklm-foot{font-size:12px}
@@ -395,6 +430,77 @@ html,body{min-height:100%;background:#081510}
       b.style.background = trainInfEnabled ? '#2f6f3e' : '#183f28';
       b.style.borderColor = trainInfEnabled ? '#8de59d' : '#477b58';
     }
+
+    function syncLoveBoostButtons() {
+      const c = $('#yklm-cheerboost');
+      const a = $('#yklm-affairboost');
+      if (c) {
+        c.textContent = cheerBoostEnabled ? '💃 啦啦隊專屬事件：開' : '💃 啦啦隊專屬事件：關';
+        c.style.background = cheerBoostEnabled ? '#2f6f3e' : '#183f28';
+        c.style.borderColor = cheerBoostEnabled ? '#8de59d' : '#477b58';
+      }
+      if (a) {
+        a.textContent = affairBoostEnabled ? '💔 外遇風險自訂：開' : '💔 外遇風險自訂：關';
+        a.style.background = affairBoostEnabled ? '#2f6f3e' : '#183f28';
+        a.style.borderColor = affairBoostEnabled ? '#8de59d' : '#477b58';
+      }
+    }
+
+    function syncLoveSettings() {
+      const pairs = [
+        ['#yklm-cheerrate', CHEER_RATE_KEY, '55'],
+        ['#yklm-affairrate', AFFAIR_RATE_KEY, '55'],
+        ['#yklm-caughtrate', CAUGHT_RATE_KEY, '45'],
+        ['#yklm-affairreward', AFFAIR_REWARD_KEY, '2'],
+        ['#yklm-affairresult', AFFAIR_RESULT_KEY, 'normal']
+      ];
+      pairs.forEach(([sel,key,def]) => {
+        const el=$(sel); if(!el)return;
+        const v=storage.getItem(key); el.value=v===null?def:v;
+      });
+    }
+    function bindLoveSettings() {
+      [['#yklm-cheerrate',CHEER_RATE_KEY],['#yklm-affairrate',AFFAIR_RATE_KEY],['#yklm-caughtrate',CAUGHT_RATE_KEY]].forEach(([sel,key])=>{
+        const el=$(sel); if(!el||el.dataset.bound)return; el.dataset.bound='1';
+        el.addEventListener('change',()=>{let v=Math.round(Number(el.value)); if(!Number.isFinite(v))v=0; v=Math.max(0,Math.min(100,v)); el.value=v; storage.setItem(key,String(v)); updateStatus('💞 感情事件設定已更新');});
+      });
+      [['#yklm-affairreward',AFFAIR_REWARD_KEY],['#yklm-affairresult',AFFAIR_RESULT_KEY]].forEach(([sel,key])=>{
+        const el=$(sel); if(!el||el.dataset.bound)return; el.dataset.bound='1';
+        el.addEventListener('change',()=>{storage.setItem(key,el.value);updateStatus('💞 外遇結果設定已更新');});
+      });
+    }
+    function fix99AllocationUI() {
+      const s=S(); if(!s)return;
+      const rows=[...document.querySelectorAll('#al-rows .abrow')], keys=POS_AB[s.pos]||[];
+      rows.forEach((r,i)=>{
+        const k=keys[i]; if(!k)return; const v=s.ab[k]||0, pk=(s.pot&&s.pot[k])||62;
+        if(v>=80&&v<99)r.classList.remove('capped');
+        const bar=r.querySelector('.bar i'), mark=r.querySelector('.bar em');
+        if(bar)bar.style.width=Math.min(100,v/99*100)+'%';
+        if(mark)mark.style.left=Math.min(100,pk/99*100)+'%';
+        const val=r.querySelector('.val'); if(val&&v>=80)val.innerHTML=`${v}<small style="opacity:.5">/${pk}</small>`;
+      });
+      const premature=[...document.querySelectorAll('#al-btm button')].find(b=>/能力已達上限/.test(b.textContent||''));
+      if(premature&&keys.some(k=>(s.ab[k]||0)<99))premature.style.display='none';
+    }
+    function consumeHigh99Training(ev) {
+      if(high99Guard)return false;
+      const row=ev.target.closest?.('.abrow'); if(!row)return false;
+      const s=S(); if(!s)return false;
+      const rows=[...document.querySelectorAll('#al-rows .abrow')],idx=rows.indexOf(row),k=idx>=0?(POS_AB[s.pos]||[])[idx]:null;
+      if(!k||s.ab[k]<80||s.ab[k]>=99)return false;
+      const top=document.getElementById('al-top'),die=top?.querySelector('#dice .die.active'),poolText=top?.querySelector('.pool')?.textContent||'',isDice=!!die;
+      if(!isDice&&!/剩餘可分配點數/.test(poolText))return false;
+      const raw=Number(die?.dataset.yklOrig||die?.textContent||1),amt=isDice?(dice6Enabled?6:Math.max(1,Math.min(6,raw))):1;
+      const oldAb=s.ab[k],oldCarry=s.carry?.[k]||0;
+      high99Guard=true; s.ab[k]=79; if(!s.carry)s.carry={}; s.carry[k]=0; allocMod.ALLOC?.render?.();
+      const proxy=[...document.querySelectorAll('#al-rows .abrow')][idx]; proxy?.click();
+      if(!isDice&&trainInfEnabled){const undo=[...document.querySelectorAll('#al-btm button')].find(b=>/復原/.test(b.textContent||'')&&!b.disabled); undo?.click();}
+      s.ab[k]=oldAb; s.carry[k]=oldCarry; addAb(k,amt); allocMod.ALLOC?.render?.(); refreshGameBoard(); high99Guard=false;
+      fix99AllocationUI(); forceDiceVisuals(); updateStatus(`🚀 ${ABL[k]||k} 已可繼續訓練至 99`);
+      ev.preventDefault(); ev.stopImmediatePropagation(); return true;
+    }
+    document.addEventListener('click',ev=>{consumeHigh99Training(ev);},true);
 
     function forceDiceVisuals() {
       const top = document.getElementById('al-top');
@@ -429,7 +535,7 @@ html,body{min-height:100%;background:#081510}
     // 真正修正能力加點：原遊戲先用原始骰值 addAb，再補上 (6 - 原骰值)。
     // 因此不是只把畫面改成 6，而是能力成長也等同每顆骰子都是 6。
     document.addEventListener('click', (ev) => {
-      if (!dice6Enabled) return;
+      if (high99Guard || !dice6Enabled) return;
 
       const row = ev.target.closest?.('.abrow');
       const top = document.getElementById('al-top');
@@ -478,7 +584,7 @@ html,body{min-height:100%;background:#081510}
     // 外部無法直接改那個閉包變數，因此採「原生加點 -> 原生復原補回 pool -> 恢復加點後能力」：
     // 結果是能力/進度照常增加，但剩餘可分配點數維持不變。
     document.addEventListener('click', (ev) => {
-      if (!trainInfEnabled || poolRefundGuard) return;
+      if (high99Guard || !trainInfEnabled || poolRefundGuard) return;
       const row = ev.target.closest?.('.abrow');
       if (!row) return;
 
@@ -501,7 +607,7 @@ html,body{min-height:100%;background:#081510}
     }, true);
 
     document.addEventListener('click', (ev) => {
-      if (!trainInfEnabled || poolRefundGuard || !pendingPoolClick) return;
+      if (high99Guard || !trainInfEnabled || poolRefundGuard || !pendingPoolClick) return;
       const row = ev.target.closest?.('.abrow');
       if (!row) return;
 
@@ -542,6 +648,7 @@ html,body{min-height:100%;background:#081510}
 
     const diceObserver = new MutationObserver(() => {
       if (dice6Enabled) forceDiceVisuals();
+      fix99AllocationUI();
     });
     diceObserver.observe(document.body, {subtree:true, childList:true, characterData:true});
 
@@ -562,10 +669,10 @@ html,body{min-height:100%;background:#081510}
       }
     }
 
-    function clamp80(v) {
+    function clamp99(v) {
       const n = Number(v);
       if (!Number.isFinite(n)) return 20;
-      return Math.max(0, Math.min(80, Math.round(n)));
+      return Math.max(0, Math.min(99, Math.round(n)));
     }
 
     function renderKV(container, obj, sourceName) {
@@ -577,7 +684,7 @@ html,body{min-height:100%;background:#081510}
         const input = document.createElement('input');
         input.type = 'number';
         input.min = '0';
-        input.max = '80';
+        input.max = '99';
         input.step = '1';
         input.value = obj[key];
         input.dataset.source = sourceName;
@@ -585,7 +692,7 @@ html,body{min-height:100%;background:#081510}
         input.addEventListener('change', () => {
           const s = S();
           if (!s) return;
-          input.value = clamp80(input.value);
+          input.value = clamp99(input.value);
           s[sourceName][key] = Number(input.value);
           refreshGameBoard();
           updateStatus('已修改 ' + (ABL[key] || key));
@@ -683,6 +790,9 @@ html,body{min-height:100%;background:#081510}
       renderTraits();
       renderOther();
       refreshGameBoard();
+      syncLoveSettings();
+      bindLoveSettings();
+      fix99AllocationUI();
       updateStatus(msg);
     }
 
@@ -733,6 +843,7 @@ html,body{min-height:100%;background:#081510}
         refreshUI('已重新讀取目前狀態');
         syncDice6Button();
         syncTrainInfButton();
+        syncLoveBoostButtons();
         forceDiceVisuals();
         return;
       }
@@ -752,17 +863,35 @@ html,body{min-height:100%;background:#081510}
         refreshUI(trainInfEnabled ? '🏋️ 訓練點數無限已開啟' : '🏋️ 訓練點數恢復正常消耗');
         return;
       }
+      if (action === 'cheerboost') {
+        cheerBoostEnabled = !cheerBoostEnabled;
+        storage.setItem(CHEER_BOOST_KEY, cheerBoostEnabled ? '1' : '0');
+        syncLoveBoostButtons();
+        refreshUI(cheerBoostEnabled
+          ? '💃 啦啦隊專屬事件已開啟'
+          : '💃 啦啦隊專屬事件已關閉');
+        return;
+      }
+      if (action === 'affairboost') {
+        affairBoostEnabled = !affairBoostEnabled;
+        storage.setItem(AFFAIR_BOOST_KEY, affairBoostEnabled ? '1' : '0');
+        syncLoveBoostButtons();
+        refreshUI(affairBoostEnabled
+          ? '💔 外遇風險自訂已開啟'
+          : '💔 外遇風險自訂已關閉');
+        return;
+      }
       if (!s) {
         refreshUI('請先開始一段生涯');
         return;
       }
 
       if (action === 'ab80') {
-        Object.keys(s.ab).forEach(k => s.ab[k] = 80);
-        refreshUI('目前能力已全設為 80');
+        Object.keys(s.ab).forEach(k => s.ab[k] = 99);
+        refreshUI('目前能力已全設為 99');
       } else if (action === 'pot80') {
-        Object.keys(s.pot).forEach(k => s.pot[k] = 80);
-        refreshUI('潛力已全設為 80');
+        Object.keys(s.pot).forEach(k => s.pot[k] = 99);
+        refreshUI('潛力已全設為 99');
       } else if (action === 'heal') {
         s.injNext = 0;
         s.tmpInj = 0;
@@ -773,8 +902,8 @@ html,body{min-height:100%;background:#081510}
         s.six = Math.max(5, Number(s.six || 0));
         refreshUI('累積擲出 6 次數已設為至少 5');
       } else if (action === 'diamond') {
-        Object.keys(s.ab).forEach(k => s.ab[k] = 80);
-        Object.keys(s.pot).forEach(k => s.pot[k] = 80);
+        Object.keys(s.ab).forEach(k => s.ab[k] = 99);
+        Object.keys(s.pot).forEach(k => s.pot[k] = 99);
         if ('genius' in s.traits) s.traits.genius = true;
         if ('iron' in s.traits) s.traits.iron = true;
         ['glass','yips','distract','cancer'].forEach(k => {
@@ -809,8 +938,12 @@ html,body{min-height:100%;background:#081510}
 
     syncDice6Button();
     syncTrainInfButton();
+    syncLoveBoostButtons();
+    syncLoveSettings();
+    bindLoveSettings();
     forceDiceVisuals();
-    console.info('[YKL Safari Direct] v0.7.0 loaded');
+    fix99AllocationUI();
+    console.info('[YKL Safari Direct] v0.9.0 loaded');
   `;
 
   document.documentElement.appendChild(mod);
